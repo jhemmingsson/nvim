@@ -25,7 +25,7 @@ return require('packer').startup(function(use)
 	-- LSP
 	use {
 		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v1.x',
+		branch = 'v3.x',
 		requires = {
 			-- LSP Support
 			{'neovim/nvim-lspconfig'},
@@ -68,10 +68,6 @@ return require('packer').startup(function(use)
     use {
         'nvim-tree/nvim-tree.lua',
     }
-
-    use '~/code/neo-todo.nvim'
-
-    use 'f-person/git-blame.nvim'
 
     use {
         "folke/todo-comments.nvim",
