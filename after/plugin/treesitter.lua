@@ -1,6 +1,18 @@
+-- Workaround for async treesitter race condition with Telescope
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    vim.schedule(function()
+      local buf = vim.api.nvim_get_current_buf()
+      if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].filetype ~= "" then
+        pcall(vim.treesitter.start, buf)
+      end
+    end)
+  end,
+})
+
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the four listed parsers should always be installed)
-  ensure_installed = { "sql", "markdown", "dockerfile", "go", "yaml", "json", "python", "javascript", "typescript", "c", "lua", "vim", "help" },
+  ensure_installed = { "sql", "markdown", "dockerfile", "go", "yaml", "json", "python", "javascript", "typescript", "c", "lua", "vim", "vimdoc" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,

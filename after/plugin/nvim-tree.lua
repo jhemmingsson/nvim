@@ -3,10 +3,6 @@
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
--- empty setup using defaults
-require("nvim-tree").setup()
-
--- OR setup with some options
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   renderer = {
@@ -14,6 +10,11 @@ require("nvim-tree").setup({
   },
   filters = {
     dotfiles = true,
+  },
+  actions = {
+    open_file = {
+      eject = false,  -- Fix for treesitter race condition with Telescope
+    },
   },
 })
 
