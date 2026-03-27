@@ -23,3 +23,6 @@ vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
 })
 vim.g.copilot_no_tab_map = true
 
+-- Claude Code
+vim.keymap.set('n', '<leader>cc', ':ClaudeCode<CR>')
+vim.keymap.set('v', '<leader>cs', ':ClaudeCodeSend<CR>')

@@ -99,5 +99,31 @@ return require('packer').startup(function(use)
         end
     }
 
-    use 'github/copilot.vim'
+    -- Claude Code integration
+    use 'folke/snacks.nvim'
+    use {
+        'coder/claudecode.nvim',
+        requires = { 'folke/snacks.nvim' },
+        config = function()
+            require("claudecode").setup({
+                terminal = {
+                    split_width_percentage = 0.45,
+                },
+            })
+            -- Fix terminal window options
+            vim.api.nvim_create_autocmd("TermOpen", {
+                callback = function()
+                    vim.opt_local.number = false
+                    vim.opt_local.relativenumber = false
+                    vim.opt_local.signcolumn = "no"
+                    vim.opt_local.statuscolumn = ""
+                    vim.opt_local.foldcolumn = "0"
+                    vim.opt_local.colorcolumn = ""
+                    vim.opt_local.cursorline = false
+                    vim.opt_local.list = false
+                end,
+            })
+        end
+    }
+
 end)
